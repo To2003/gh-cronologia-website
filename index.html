@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GH Generación Dorada — Estado</title>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1 id="titulo">Gran Hermano — Generación Dorada</h1>
+    <p id="subtitulo">Cargando datos...</p>
+  </header>
+
+  <div id="error-container"></div>
+
+  <div class="section-label">En placa esta semana</div>
+  <div class="placa-grid" id="placa-grid">
+    <div class="vacio">Cargando...</div>
+  </div>
+
+  <div class="section-label">Historial cronológico</div>
+  <div class="filtros">
+    <button class="filtro activo" data-filtro="todos" onclick="setFiltro(this)">Todos</button>
+    <button class="filtro" data-filtro="eliminado" onclick="setFiltro(this)">Eliminados</button>
+    <button class="filtro" data-filtro="ingreso" onclick="setFiltro(this)">Ingresos</button>
+    <button class="filtro" data-filtro="abandono" onclick="setFiltro(this)">Abandonos</button>
+  </div>
+  <div class="timeline" id="timeline">
+    <div class="vacio">Cargando...</div>
+  </div>
+
+  <footer>
+    <div class="dot-vivo"></div>
+    <span id="footer-texto">Actualizando...</span>
+  </footer>
+
+</div>
+
+<script src="scripts.js"></script>
+
+</body>
+</html>

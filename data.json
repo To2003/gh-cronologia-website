@@ -1,0 +1,108 @@
+{
+  "temporada": "Gran Hermano — Generación Dorada",
+  "ultima_actualizacion": "2026-04-14",
+    "placa": [
+        { "nombre": "Ejemplo: Cristina Mellara", "razon": "votada" },
+        { "nombre": "Ejemplo: Jorge Rodríguez", "razon": "fulminado" },
+        { "nombre": "Ejemplo: Susana López", "razon": "incumplimiento" }
+  ],
+
+  "eventos": [
+    {
+      "tipo": "abandono",
+      "nombre": "Divina Gloria",
+      "detalle": "Abandonó la casa por hipertensión a los dos días de arrancar el certamen",
+      "fecha": "2026-02-25"
+    },
+    {
+      "tipo": "ingreso",
+      "nombre": "Carlota (Carla Bigliani)",
+      "detalle": "Ingresó como jugadora de reemplazo por las primeras bajas",
+      "fecha": "2026-02-26"
+    },
+    {
+      "tipo": "ingreso",
+      "nombre": "Jessica 'La Maciel'",
+      "detalle": "Ingresó como jugadora de reemplazo por las primeras bajas",
+      "fecha": "2026-02-26"
+    },
+    {
+      "tipo": "ingreso",
+      "nombre": "Tamara Paganini",
+      "detalle": "Ingresó como jugadora de reemplazo por las primeras bajas",
+      "fecha": "2026-02-26"
+    },
+    {
+      "tipo": "eliminado",
+      "nombre": "Gabriel Lucero",
+      "detalle": "Eliminado en el versus contra Yanina Zilli por un porcentaje del 54.8% de los votos negativos",
+      "fecha": "2026-03-02"
+    },
+    {
+      "tipo": "eliminado",
+      "nombre": "Tomás (Tomy Riguera)",
+      "detalle": "Eliminado en el versus contra [X] por un porcentaje del 59.2% de los votos negativos en placa planta",
+      "fecha": "2026-03-10"
+    },
+    {
+      "tipo": "expulsado",
+      "nombre": "Carmiña Masi",
+      "detalle": "Expulsada tras realizar comentarios racistas contra Jenny Mavinga",
+      "fecha": "2026-03-11"
+    },
+    {
+      "tipo": "eliminado",
+      "nombre": "Carlota (Carla Bigliani)",
+      "detalle": "Eliminada en el versus contra [X] por un porcentaje del [X]% de los votos en placa positiva",
+      "fecha": "2026-03-12"
+    },
+    {
+      "tipo": "eliminado",
+      "nombre": "Nicolás 'Nick' Sícaro",
+      "detalle": "Eliminado en el versus contra Martín Rodríguez por un porcentaje del 43.9% de los votos positivos",
+      "fecha": "2026-03-16"
+    },
+    {
+      "tipo": "eliminado",
+      "nombre": "Kennys Palacios",
+      "detalle": "Eliminado en el versus contra Lola Tomaszeuski por un porcentaje del [X]%",
+      "fecha": "2026-03-23"
+    },
+    {
+      "tipo": "abandono",
+      "nombre": "Jenny Mavinga",
+      "detalle": "Dejó la competencia por decisión propia",
+      "fecha": "2026-03-25"
+    },
+    {
+      "tipo": "eliminado",
+      "nombre": "Franco Poggio",
+      "detalle": "Eliminado en el versus contra Brian Sarmiento por un porcentaje del [X]%",
+      "fecha": "2026-03-30"
+    },
+    {
+      "tipo": "eliminado",
+      "nombre": "Cinzia Francischiello",
+      "detalle": "Eliminada en el versus contra Yisela 'Yipio' Pintos por un porcentaje del [X]%",
+      "fecha": "2026-04-06"
+    },
+    {
+      "tipo": "abandono",
+      "nombre": "Andrea del Boca",
+      "detalle": "Se retiró por problemas de salud tras una caída",
+      "fecha": "2026-04-10"
+    },
+    {
+      "tipo": "ingreso",
+      "nombre": "Grecia Colmenares",
+      "detalle": "Ingresó oficialmente como el reemplazo de Andrea del Boca",
+      "fecha": "2026-04-13"
+    },
+    {
+      "tipo": "eliminado",
+      "nombre": "Lola Tomaszeuski",
+      "detalle": "Eliminada en el versus contra Brian Sarmiento por un porcentaje del [X]%",
+      "fecha": "2026-04-13"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "temporada": "Gran Hermano — Generación Dorada",
+  "jugadores": [
+    { "id": 1, "nombre": "Andrea del Boca" },
+    { "id": 2, "nombre": "Brian Sarmiento" },
+    { "id": 3, "nombre": "Lola Tomaszeuski" },
+    { "id": 4, "nombre": "Manuel Ibero" },
+    { "id": 5, "nombre": "Gabriel Lucero" },
+    { "id": 6, "nombre": "Divina Gloria" },
+    { "id": 7, "nombre": "Tomás (Tomy Riguera)" },
+    { "id": 8, "nombre": "Carmiña Masi" },
+    { "id": 9, "nombre": "Nicolás 'Nick' Sícaro" },
+    { "id": 10, "nombre": "Kennys Palacios" },
+    { "id": 11, "nombre": "Jenny Mavinga" },
+    { "id": 12, "nombre": "Franco Poggio" },
+    { "id": 13, "nombre": "Cinzia Francischiello" },
+    { "id": 14, "nombre": "Juan Caruso" },
+    { "id": 15, "nombre": "Pincoya" },
+    { "id": 16, "nombre": "Titi" },
+    { "id": 17, "nombre": "Nazareno Pompei" },
+    { "id": 18, "nombre": "Yanina Zilli" },
+    { "id": 19, "nombre": "Yisela 'Yipio' Pintos" },
+    { "id": 20, "nombre": "Solange Abraham" },
+    { "id": 21, "nombre": "Emanuel Di Gioia" },
+    { "id": 22, "nombre": "Eduardo Carrera" },
+    { "id": 23, "nombre": "Danelik Galazán" },
+    { "id": 24, "nombre": "Martín Rodríguez" },
+    { "id": 25, "nombre": "Carlota (Carla Bigliani)" },
+    { "id": 26, "nombre": "Jessica 'La Maciel'" },
+    { "id": 27, "nombre": "Tamara Paganini" },
+    { "id": 28, "nombre": "Grecia Colmenares" }
+  ]
+}
