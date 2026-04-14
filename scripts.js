@@ -1,4 +1,4 @@
-const DATA_URL = 'data.json'; 
+const DATA_URL = 'data.json';
 const JUGADORES_URL = 'jugadores.json';
 
 const iconos = { eliminado: '✕', ingreso: '+', abandono: '↙', expulsado: '⚠' };
@@ -32,7 +32,7 @@ function formatFecha(str) {
 
 function renderPlaca(placa) {
     const grid = document.getElementById('placa-grid');
-    if(!grid) return; // Por si no tenés el div en el HTML
+    if(!grid) return; 
     if (!placa || placa.length === 0) {
         grid.innerHTML = '<div class="vacio">No hay participantes en placa</div>';
         return;
@@ -77,40 +77,68 @@ function renderTimeline(eventos) {
     }).join('');
 }
 
-// Nueva función: Cruza jugadores.json con datos.json y renderiza los activos
 function procesarYRenderizarActivos(jugadoresBase, eventos) {
     let estadoJugadores = {};
 
-    // 1. Cargamos a todos los del listado base como "activos"
+    // 1. Cargamos a todos los del listado base asumiendo que entraron el Día 1
     jugadoresBase.forEach(j => {
-        estadoJugadores[j.nombre] = 'activo';
+        estadoJugadores[j.nombre] = {
+            estado: 'activo',
+            fechaIngreso: '2026-02-23',
+            detalle: 'Ingresó el día 1'
+        };
     });
 
-    // 2. Ordenamos los eventos del más viejo al más nuevo para simular la historia
-    const eventosCronologicos = [...eventos].sort((a, b) => a.fecha.localeCompare(b.fecha));
+    // 2. Ordenamos los eventos para procesar la historia en orden
+    const eventosCronologicos = [...eventos].sort((a, b) => {
+        if (!a.fecha) return 1;
+        if (!b.fecha) return -1;
+        return a.fecha.localeCompare(b.fecha);
+    });
 
-    // 3. Modificamos el estado según la historia
+    // 3. Modificamos el estado y guardamos datos de nuevos ingresos
     eventosCronologicos.forEach(e => {
         if (e.tipo === 'ingreso') {
-            estadoJugadores[e.nombre] = 'activo'; // Si entró, está activo
+            // Si es un evento de ingreso genérico de todos, lo salteamos
+            if (e.nombre.includes("Participantes") || e.nombre.includes(" y ")) return;
+            
+            estadoJugadores[e.nombre] = {
+                estado: 'activo',
+                fechaIngreso: e.fecha,
+                detalle: e.detalle || 'Nuevo ingreso'
+            };
         } else if (['eliminado', 'abandono', 'expulsado'].includes(e.tipo)) {
-            estadoJugadores[e.nombre] = 'inactivo'; // Si se fue, lo ocultamos
+            if (estadoJugadores[e.nombre]) {
+                estadoJugadores[e.nombre].estado = 'inactivo'; 
+            }
         }
     });
 
-    // 4. Filtramos el listado final
-    const jugadoresActivos = Object.keys(estadoJugadores).filter(nombre => estadoJugadores[nombre] === 'activo');
+    // 4. Filtramos solo a los que quedaron en 'activo'
+    const jugadoresActivos = Object.keys(estadoJugadores).filter(nombre => estadoJugadores[nombre].estado === 'activo');
 
-    // 5. Los dibujamos en el HTML (Necesitás un div con id "jugadores-activos-grid")
+    // 5. Los dibujamos en el HTML
     const gridActivos = document.getElementById('jugadores-activos-grid');
     if (gridActivos) {
+        if (jugadoresActivos.length === 0) {
+            gridActivos.innerHTML = '<div class="vacio">No hay jugadores activos registrados</div>';
+            return;
+        }
+
         gridActivos.innerHTML = jugadoresActivos.map(nombre => {
+            const data = estadoJugadores[nombre];
             const col = colorAvatar(nombre);
             const ini = initiales(nombre);
+            const fechaFormateada = formatFecha(data.fechaIngreso);
+            
             return `
-            <div class="jugador-card">
+            <div class="activo-card">
                 <div class="avatar" style="background:${col.bg};color:${col.txt}">${ini}</div>
-                <div class="jugador-name">${nombre}</div>
+                <div class="activo-info">
+                    <div class="activo-name">${nombre}</div>
+                    <div class="activo-meta">📅 Ingreso: ${fechaFormateada}</div>
+                    <div class="activo-meta detail">${data.detalle}</div>
+                </div>
             </div>`;
         }).join('');
     }
@@ -125,19 +153,17 @@ function setFiltro(btn) {
 
 async function cargarDatos() {
     try {
-        // Pedimos los dos archivos en paralelo para que cargue más rápido
         const [resDatos, resJugadores] = await Promise.all([
             fetch(DATA_URL + '?t=' + Date.now()),
             fetch(JUGADORES_URL + '?t=' + Date.now())
         ]);
 
-        if (!resDatos.ok) throw new Error(`HTTP datos.json ${resDatos.status}`);
+        if (!resDatos.ok) throw new Error(`HTTP data.json ${resDatos.status}`);
         if (!resJugadores.ok) throw new Error(`HTTP jugadores.json ${resJugadores.status}`);
 
         const data = await resDatos.json();
         const dataJugadores = await resJugadores.json();
 
-        // 1. Textos generales
         const tituloEl = document.getElementById('titulo');
         if(tituloEl) tituloEl.textContent = data.temporada || 'Gran Hermano';
 
@@ -146,22 +172,18 @@ async function cargarDatos() {
         const fechaFmt = fecha.toLocaleDateString('es-AR', opciones);
         
         const subEl = document.getElementById('subtitulo');
-        const footEl = document.getElementById('footer-texto');
         if(subEl) subEl.textContent = `Última actualización: ${fechaFmt}`;
-        if(footEl) footEl.textContent = `Datos al ${fechaFmt}`;
 
-        // 2. Render de Placa y Eventos
         renderPlaca(data.placa);
         todosLosEventos = (data.eventos || []).sort((a, b) => b.fecha.localeCompare(a.fecha));
         renderTimeline(todosLosEventos);
 
-        // 3. Procesar Activos (¡Acá pasa la magia que pediste!)
         procesarYRenderizarActivos(dataJugadores.jugadores, data.eventos);
 
     } catch (err) {
         const ec = document.getElementById('error-container');
         if(ec) {
-            ec.innerHTML = `<div class="error-banner">Error al cargar los JSON. Asegurate de que ambos existan y estén en la carpeta. (${err.message})</div>`;
+            ec.innerHTML = `<div class="error-banner">Error al cargar los JSON. Asegurate de que ambos existan y estén en la misma carpeta. (${err.message})</div>`;
         }
         console.error(err);
     }
